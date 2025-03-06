@@ -13,7 +13,7 @@ public class PlayerBehavior : MonoBehaviour
     public bool isAlive = true;
 
     // In which direction the player will move
-    private Vector3 direction;
+    public Vector3 direction;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
