@@ -14,6 +14,8 @@ public class PlayerBehavior : MonoBehaviour
 
     // In which direction the player will move
     public Vector3 direction;
+
+    public Rigidbody playerRb;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,7 +27,10 @@ public class PlayerBehavior : MonoBehaviour
     void Update()
     {
         // Keyword - transform
-        transform.Translate(direction * Time.deltaTime * speed);
+        // transform.Translate(direction * Time.deltaTime * speed);
+        
+        // Use Rigidbody to move the player
+        playerRb.linearVelocity = direction * speed;
     }
 
     // Will trigger when the player presses
