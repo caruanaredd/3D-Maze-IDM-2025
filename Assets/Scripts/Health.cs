@@ -6,6 +6,8 @@ public class Health : MonoBehaviour
     public int points = 5;
     public Vector3 respawnPoint;
     public TMP_Text healthText;
+
+    public GameObject gameOverScreen;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -42,6 +44,7 @@ public class Health : MonoBehaviour
         // For now, fix later
         if (points < 1)
         {
+            gameOverScreen.SetActive(true);
             Destroy(gameObject);
         }
     }
