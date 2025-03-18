@@ -8,9 +8,8 @@ public class PlayerBehavior : MonoBehaviour
     
     // Basic variables for our player
     public string heroName = "Capsule Kid";
-    public int health = 100;
     public float speed = 5.5f;
-    public bool isAlive = true;
+    public float jumpForce = 5f;
 
     // In which direction the player will move
     public Vector3 direction;
@@ -24,13 +23,18 @@ public class PlayerBehavior : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // Keyword - transform
         // transform.Translate(direction * Time.deltaTime * speed);
         
         // Use Rigidbody to move the player
-        playerRb.linearVelocity = direction * speed;
+        Vector3 velocity = direction * speed;
+        
+        // Lets the player fall normally
+        velocity.y = playerRb.linearVelocity.y;
+        
+        playerRb.linearVelocity = velocity;
     }
 
     // Will trigger when the player presses
@@ -40,5 +44,17 @@ public class PlayerBehavior : MonoBehaviour
         // reading the player's input
         Vector2 input = value.Get<Vector2>();
         direction = new Vector3(input.x, 0, input.y);
+    }
+
+    private void OnJump(InputValue value)
+    {
+        // Check if the player is standing on something
+        bool isGrounded = Physics.Raycast(transform.position, Vector3.down, 0.6f);
+
+        if (isGrounded)
+        {
+            // Push the player towards the sky
+            playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
     }
 }

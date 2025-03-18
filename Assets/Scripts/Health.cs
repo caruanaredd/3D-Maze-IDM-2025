@@ -20,6 +20,12 @@ public class Health : MonoBehaviour
         {
             Damage(1);
         }
+
+        if (other.CompareTag("Checkpoint"))
+        {
+            respawnPoint = other.transform.position;
+            respawnPoint.y = transform.position.y;
+        }
     }
 
     /// <summary>
